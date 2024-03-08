@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block employee_statistics_block %}
+
+
+<style>
+    #employee_statistics_title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        color: #f77e7e;
+        position: relative;
+        margin-left: 76px;
+        top: 90px;
+        font-weight: 400;
+    }
+
+    #employee_statistics_table {
+        position: relative;
+        margin-left: 70px;
+        top: 110px;
+        font-size: 16px;
+    }
+
+    .spaced-table {
+        border-collapse: collapse;
+    }
+    .spaced-table th,
+    .spaced-table td {
+        padding: 8px; 
+    }
+    .spaced-table th:not(:last-child),
+    .spaced-table td:not(:last-child) {
+        padding-right: 80px; 
+    }
+</style>
+
+<h2 id="employee_statistics_title">Employee performance until - {{today}}</h2><br>
+<table id="employee_statistics_table" class="spaced-table">
+    <tr>
+        <th>Employee</th>
+        <th>Service done</th>
+        <th>Earnings</th>
+    </tr>
+    {% for employee in employees %}
+        <tr>
+            <td> {{employee}}</td>
+            <td> {{employee.total_services}}</td>
+            <td> {{employee.total_earnings}} €</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

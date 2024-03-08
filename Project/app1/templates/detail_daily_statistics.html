@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block detail_daily_statistics_block %}
+
+<style>
+  .detail_main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 100px;
+  }
+
+  .result-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 600px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 30px;
+  }
+
+  .result-info h4 {
+    margin: 0;
+  }
+
+  .result-details button {
+    background-color: #f79a9a;
+    color: #fff;
+    border:  rgb(249, 227, 173);
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .result-details button:hover {
+    background-color:transparent;
+    color: transparent;
+    border: 2px solid grey;
+    color: grey;
+  }
+  #hideDiv {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+  }
+
+  #hideDiv h4 {
+    margin-top: 0;
+  }
+
+  #hideDiv div {
+    margin-bottom: 10px;
+  }
+
+  #date_earnings {
+    color: grey;
+  }
+
+  #money_earnings {
+    color:   #d25a5a;
+    font-size: 18px;
+    display: flex;
+    justify-content: start;
+    font-weight: bolder;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    width: 500px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .services-container {
+    grid-column: 1 / span 1;
+  }
+
+  .employees-container {
+    grid-column: 2 / span 1;
+  }
+
+  .grid-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .services-container,
+  .employees-container {
+    flex: 1;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+  }
+
+  .employees-container {
+    border-right: none;
+  }
+  
+  #total_money {
+    color:  #d25a5a;
+    position: relative;
+    bottom: 20px;
+    font-size: 22px;
+    top: 20px;
+  }
+
+</style>
+<script>
+  let previousOpen = "";
+
+  function showServices(categoryId) {
+    let data = document.getElementById("hideDiv" + categoryId);
+    let displayValue = "";
+
+    if (data.style.display == "") {
+      displayValue = "none";
+    }
+
+    if (previousOpen && previousOpen !== data) {
+      previousOpen.style.display = "none";
+    }
+
+    data.style.display = displayValue;
+    previousOpen = data;
+}
+
+</script>
+
+<div class="detail_main">
+  {% for element in data %}
+    <div class="result-container">
+      <div class="result-info">
+        <h4 id="date_earnings">{{ element.date }}</h4>
+        <span id="money_earnings">Total: {{ element.total_earnings.total_earnings }}€</span>
+      </div>
+      <div class="result-details">
+        <button onclick="showServices('{{element.date}}')" class="servicesButton">Details</button>
+      </div>
+    </div>
+
+    <div id="hideDiv{{element.date}}" style="display:none">
+      <div class="grid-container">
+        <div class="services-container">
+          {% for service in element.best_services %}
+            {{ service.service__name }} - {{ service.total_appointments }}x<br><br>
+          {% endfor %}
+        </div>
+    
+        <div class="employees-container">
+          {% for employee in element.best_employees %}
+            {{ employee.employee__first_name}} - {{ employee.total_services }} services<br><br>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  <span id="total_money"><b>TOTAL: {{total.total}}€</b></span>
+</div>
+
+
+{% endblock %}

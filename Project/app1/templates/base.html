@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js"></script>
+      
+    <title>Web application for beauty salon</title>
+</head>
+
+<style>
+    .navbar {
+        background-color: #fff;
+        color: rgb(87, 85, 85);
+        opacity: 1;
+        height: 0px;
+        width: 100%;
+        margin-top: 30px;
+        font-size: 20px;
+        z-index: 40;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .title {
+        font-size: 27px;
+        font-family: 'Brush Script MT';
+        background-color: white;
+        padding: 15px;
+        color: black;
+        text-align: center;
+    }
+
+    /*navbar*/
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
+
+    ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        position: relative;
+        bottom: 22px;
+    }
+
+    .navigation_ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: 22px;
+        text-transform: uppercase;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: rgb(87, 85, 85);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        padding: 14px 16px;
+        text-align: start;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    li a {
+        text-decoration: none; 
+    }
+
+    li a:hover {
+        text-decoration: none; 
+        position: relative; 
+        font-weight: bold;
+    }
+
+    li a:hover::after {
+        content: ""; 
+        display: block;
+        width: 100%; 
+        height: 2px; 
+        background-color: #f77e7e;
+        position: absolute;
+        bottom: 4px; 
+        left: 0;
+    }
+
+
+    #recension_tag {
+        font-family: 'Brush Script Std';
+        text-align: center;
+        font-size: 35px;
+        color: rgb(100, 98, 98);
+        position: relative;
+        top: 400px;
+    }
+
+    .dropbtn {
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        z-index: 50;
+    }
+
+    .user_account {
+        position: relative;
+        left: 360px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: white;
+        border-color:white;
+        min-width: 140px;
+        height: auto;
+        z-index: 80 !important;
+        margin-left: 20px;
+        top: 60px;
+        overflow: visible;
+        padding: 10px;
+    }
+
+    .dropdown-content a {
+        color: rgb(87, 85, 85);
+        text-decoration: none;
+        display: block;
+        padding: 8px 0; 
+        left: 14px;
+        font-family: 12px;
+    }
+
+    .dropdown li a {
+        color: rgb(87, 85, 85);
+    }
+
+    .dropdown-content a:hover {
+        text-decoration: underline;
+        font-size: 14px;
+        font-weight: bolder;
+        color:#f77e7e;
+        background-color: white;
+        z-index: 30;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        
+    }
+
+    .logo{
+        font-size: 13px;
+        font-family:system-ui;
+        background-color: #f77e7e;
+        padding: 10px;
+        color: #fff;
+        max-height: 20px;
+    }
+
+    li {
+        display: inline-block;
+        position: relative;
+        top: 20px;
+        text-align: start;
+        margin-left: 20px;
+    }
+
+    #social_icons {
+        position: relative;
+        left: 750px;
+    }
+
+    #user_info {
+        position: relative;
+        top: 20px;
+        left: 800px;
+    }
+
+    #main_title {
+        font-weight: 300;
+        font-family: 'Times New Roman', Times, serif;
+        color:  #f77e7e;
+        text-align: center;
+        font-size: 30px;
+        margin-top: 15px;
+    }
+
+    #navigation_hr {
+        top: 20px;
+        position: relative;
+        
+    }
+
+    #dropdown_user:hover {
+        background-color: #f77e7e;
+    }
+</style>
+
+<body>
+        <div class="logo">
+            <ul>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> 021 626 294</li>
+                <li><i class="fa fa-envelope" aria-hidden="true"></i> timebeauty400@gmail.com</li>
+                <li><i class="fa fa-clock-o" aria-hidden="true"></i> Mon - Fri 8 AM - 4 PM</li>
+
+                <div id="social_icons">
+                    <li><i class="fa fa-facebook" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-instagram" aria-hidden="true"></i></li>
+                    <li><i class="fa fa-google" aria-hidden="true"></i></li>
+                </div>
+
+                <div id="user_info">
+                    {% if user.is_authenticated and user.role == 'user' %}
+                            <div class="dropdown">
+                                 <li class="dropbtn"><a style="text-decoration: none;color:white;background-color: #f77e7e; position: absolute;top:-32px; width: 100px;"><i class="fa fa-user" aria-hidden="true"></i>{{request.user}}</a></li><br><br>
+                                 <div class="dropdown-content" style="position: absolute; top: 20px; background-color: #f77e7e; padding: 9px;">
+                                     <a id = "dropdown_user" href="{% url 'user_appointments_past' user_id=request.user.id %}" style="font-size: 12px;color: #fff;font-family: system-ui;">My past appointments</a>
+                                     <a id = "dropdown_user" href="{% url 'user_appointments_future' user_id=request.user.id %}" style="font-size: 12px;color: #fff;font-family: system-ui">My future appointments</a>
+                                     <a id = "dropdown_user" href="{% url 'change_password' %}" style="font-size: 12px;color: #fff;font-family: system-ui">Change password
+                                     <a id = "dropdown_user" href="{% url 'logout' %}" style="font-size: 12px;color: #fff;font-family: system-ui">Logout   <i class="fa fa-sign-out"></i></a>
+                                 </div>        
+                             </div>
+                
+                    {% elif user.is_authenticated and request.user.is_superuser %}
+                        <i class="fa fa-user" aria-hidden="true"></i>  Administrator
+
+                    {% elif user.is_authenticated and user.role == 'employee' %}
+                    <div class="dropdown">
+                            <li class="dropbtn"><a style="text-decoration: none;color:white;background-color: #f77e7e; position: absolute;top:-32px; width: 100px;"><i class="fa fa-user" aria-hidden="true"></i>{{request.user}}</a></li><br><br>
+                            <div class="dropdown-content" style="position: absolute; top: 20px; background-color: #f77e7e; padding: 9px;">
+                                <a id = "dropdown_user" href="{% url 'employee_appointments_past' user_id=request.user.id %}" style="font-size: 12px;color: #fff;font-family: system-ui">My past appointments</a>
+                                <a id = "dropdown_user" href="{% url 'employee_appointments_future' user_id=request.user.id %}" style="font-size: 12px;color: #fff;font-family: system-ui">My future appointments</a>
+                                <a id = "dropdown_user" href="{% url 'change_password' %}" style="font-size: 12px;color: #fff;font-family: system-ui">Change password
+                                <a id = "dropdown_user" href="{% url 'logout' %}" style="font-size: 12px;color: #fff;font-family: system-ui">Logout   <i class="fa fa-sign-out"></i></a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </ul>
+        </div>
+
+        <h2 id="main_title">Beauty Time</h2>
+        <hr id="navigation_hr">
+
+
+        <div class="navbar">
+            <ul class="navigation_ul">
+                {% if user.is_authenticated and user.role == 'user' %}
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'price_list' %}">Prices</a></li>
+                    <li><a href="{% url 'our_team' %}">Our team</a></li>
+                    <li><a href="{% url 'reservation_service' %}">Online reservation</a></li>
+                    <li><a href="{% url 'add_review' %}">Add review</a></li>
+                      
+                {% elif user.is_authenticated and request.user.is_superuser %}
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'price_list' %}">Prices</a></li>
+                    <li><a href="{% url 'our_team' %}">Our team</a></li>
+                    <div class="dropdown">
+                        <li class="dropbtn"><a style="text-decoration: none; color: rgb(87, 85, 85);">Users <i class="fa fa-caret-down" aria-hidden="true"></i></a></li><br><br>
+                            <div class="dropdown-content">
+                                <a href="{% url 'users_list' %}" style="font-size: 14px;">Users</a>
+                                <a href="{% url 'employees_list' %}" style="font-size: 14px;">Employees</a>
+                            </div>
+                    </div>
+            
+                     <div class="dropdown">
+                        <li class="dropbtn"><a style="text-decoration: none;color: rgb(87, 85, 85);">New <i class="fa fa-caret-down" aria-hidden="true"></i></a></li><br><br>
+                            <div class="dropdown-content">
+                                <a href="{% url 'add_service' %}" style="font-size: 14px;">Service</a>
+                                <a href="{% url 'add_category' %}" style="font-size: 14px;">Category</a>
+                                <a href="{% url 'add_user' %}" style="font-size: 14px;">User</a>
+                                <a href="{% url 'add_employee' %}" style="font-size: 14px;">Employee</a>
+                            </div>
+                    </div>
+            
+                    <div class="dropdown">
+                        <li class="dropbtn"><a style="text-decoration: none; color: rgb(87, 85, 85);">Statistics <i class="fa fa-caret-down" aria-hidden="true"></i></a></li><br><br>
+                            <div class="dropdown-content">
+                                <a href="{% url 'daily_earnings' %}" style="font-size: 14px;">Earnings per day</a>
+                                <a href="{% url 'detail_daily_statistics' %}" style="font-size: 14px;">Detailed statistics</a>
+                                <a href="{% url 'best_selling_services' %}" style="font-size: 14px;">Services</a>
+                                <a href="{% url 'employee_statistics' %}" style="font-size: 14px;">Employees by quantity</a>
+                                <a href="{% url 'average_rating_by_employee_quarter'%}" style="font-size: 14px;"> Top 3 employees</a>
+                            </div>
+                    </div>
+                    <li><a href="{% url 'reservation_service' %}">Online reservation</a></li>
+                    <li><a href="{% url 'logout' %}" style="position: relative;"><i class="fa fa-sign-out"></i></a></li>
+                {% elif user.is_authenticated and user.role == 'employee' %}
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'price_list' %}">Prices</a></li>
+                    <li><a href="{% url 'our_team' %}">Our team</a></li>
+                    <li><a href="{% url 'reservation_service' %}">Online reservation</a></li>
+                  
+                {% elif request.user.is_anonymous %}
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'price_list' %}">Prices</a></li>
+                    <li><a href="{% url 'our_team' %}">Our team</a></li>
+                    <li style="position: relative;left: 220px"><a href= "{% url 'register' %}" style="color: rgb(87, 85, 85);"><i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
+                    <li style="position: relative;left:220px;"><a href="{% url 'login' %}" style="text-decoration: none;color: rgb(87, 85, 85);"> <i class="fa fa-user" aria-hidden="true"></i> Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+</html>
+
+    {% block content%}
+    {% endblock %}
+    {% block login_block %}
+    {% endblock %}
+    {% block register_block %}
+    {% endblock %}
+    {% block home_block %}
+    {% endblock %}
+    {% block add_service_block %}
+    {% endblock %}
+    {% block delete_service_block %}
+    {% endblock %}
+    {% block add_user_block %}
+    {% endblock %}
+    {% block add_employee_block %}
+    {% endblock %}
+    {% block update_user_block %}
+    {% endblock %}
+    {% block update_employee_block %}
+    {% endblock %}
+    {% block delete_user_block %}
+    {% endblock %}
+    {% block delete_employee_block %}
+    {% endblock %}
+    {% block users_list_block %}
+    {% endblock %}
+    {%block employees_list_block %}
+    {% endblock %}
+    {% block logout_block %}
+    {% endblock %}
+    {% block add_category_block %}
+    {% endblock %}
+    {% block index_block %}
+    {% endblock %}
+    {% block print_categories_block %}
+    {% endblock %}
+    {% block print_services_block %}
+    {% endblock %}
+    {% block update_service_block %}
+    {% endblock %}
+    {% block employee_service_block %}
+    {% endblock %}
+    {% block price_list_block %}
+    {% endblock %}
+    {% block print_empServices_block %}
+    {% endblock %}
+    {% block employee_services_list_block %}
+    {% endblock %}
+    {% block change_password_block %}
+    {% endblock %}
+    {% block team_block %}
+    {% endblock %}
+    {% block user_appointments_past_block %}
+    {% endblock %}
+    {% block user_appointments_future_block %}
+    {% endblock %}
+    {% block employee_appointments_block %}
+    {% endblock %}
+    {% block delete_confirmation_block %}
+    {% endblock %}
+    {% block reservation_service_block %}
+    {% endblock %}
+    {% block reservation_details_block %}
+    {% endblock %}
+    {% block daily_earnings_block %}
+    {% endblock %}
+    {% block best_selling_services_price_block %}
+    {% endblock %}
+    {% block best_selling_services_num_block %}
+    {% endblock %}
+    {% block employee_statistics_block %}
+    {% endblock %}
+    {% block detail_daily_statistics_block %}
+    {% endblock %}
+    {% block delete_appointment_block %}
+    {% endblock %}
+    {% block add_review_block %}
+    {% endblock %}
+    {% block emplyoee_per_year_block %}
+    {% endblock %}
+    {% block employee_per_quarter_block %}
+    {% endblock %}
+    {% block best_selling_services_block %}
+    {% endblock %}
+    {% block gmail_block %}
+    {% endblock %}
+    {% block employee_app_past_block%}
+    {% endblock %}
+    {% block employee_app_future_block%}
+    {% endblock %}
+    {% block index_test %}
+    {% endblock %}
+
+</body>
+
+
+</html>

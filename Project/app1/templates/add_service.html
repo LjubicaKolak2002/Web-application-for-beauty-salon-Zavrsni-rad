@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block add_service_block %}
+
+
+<style>
+    .service_card {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 380px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 150px;
+        height: 380px;  
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        left: 8%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 30px;
+        
+    }
+
+
+    .formFields input {
+        width: 300px;
+    }
+
+
+    #service_title {
+        color: #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    #new_service_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 118px;
+        cursor: pointer;
+        position: relative;
+        left: 31px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+</style>
+
+<form method="post">
+        <div class="service_card">
+                <h2 id="service_title">Adding new service</h2><br><br>
+                <div class="formFields">
+                    {{form.as_table}}
+                    {% csrf_token %}
+                </div>
+                <input type="submit" value="Add service" id="new_service_btn">
+        </div>
+    
+</form>
+{% endblock %}

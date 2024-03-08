@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block print_services_block %}
+
+
+<style>
+    .service_hr {
+        width: 60%;
+        border-radius: 1px;
+        background-color: grey;
+        position: relative;
+        top: 30px;
+        left: 18%;
+    }
+
+    #category_name {
+        font-family: 'Brush Script Std';
+        font-size: 25px;
+        position: relative;
+        top: 25px;
+    }
+
+
+    #filterButton {
+        position: relative;
+        margin-left: 1250px;
+        top: 54px;
+    }
+
+    .searchBar {
+        position: relative;
+        margin-left: 1050px;
+        top: 70px;
+    }
+
+    #sortOption {
+        position: relative;
+        margin-left: 1280px;
+        bottom: 500px;
+    }
+
+    #sortOption {
+        position: fixed; 
+        top: 220px;
+        z-index: 1000;
+    }
+
+    input,
+    select {
+      height: 24px;
+    }
+
+    .filter_input {
+      position: relative;
+      top: 12px;
+      width: 70px;
+    }
+
+
+    #to_text {
+      position: relative;
+      top: 12px;
+      font-family: sytem-ui;
+    }
+
+  
+    #filterBtn {
+      background-color: #f77e7e;
+      border: none;
+      height: 27px;
+      width: 80px;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 12px;
+      color:#fff;
+      margin: 10px;
+      font-weight: bold;
+      top: 13px;
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+</style>
+
+<script>
+    function showFilter() {
+    let data = document.getElementById("hideDiv"),
+    displayValue = "";
+    if (data.style.display == "") //element je skriven
+      displayValue = "none"; 
+    data.style.display = displayValue;  //prikazivanje elementa
+  } 
+
+</script>
+
+<div class="searchBar">
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <form class="d-flex" role="search">
+        <input class="" name="q" type="search" placeholder="Search" aria-label="Search">
+        <button class="icons" style="color: #f77e7e; font-size: 20px;"><i class="fa fa-search"></i></button></a>
+      </form>
+    </div>
+</nav> <br>
+</div>
+
+<div id="filterButton">
+{% load static %}<button onclick="showFilter()" class="icons" style="color: #f77e7e;font-size: 20px;"><i class="fa fa-filter"></i></button></a></td></a></td></button><br/><br>
+
+<div id="hideDiv" style="display:none">
+    <form>
+        <input type="number" name="min_price" maxlength="4" placeholder="min" min="5" max="100" class="filter_input"> <span id="to_text">to</span>
+        <input type="number" name="max_price" maxlength="4" placeholder="max" max="100" min="5" class="filter_input"> 
+        <button type="submit" id="filterBtn">Filter</button>
+    </form>
+</div>
+</div>
+
+
+<div id="sortOption">
+  <select name="sort_options" id="sort" onchange="location = this.value;">
+      <option disabled selected>SORT BY:</option>
+      <option value="{%url 'sort_services_asc' service_category_id=category.id %}">Name (A-Z)</option>
+      <option value="{%url 'sort_services_desc' service_category_id=category.id %}">Name (Z-A)</option>
+      <option value="{%url 'sort_byprice_asc' service_category_id=category.id %}">By price(asc)</option>
+      <option value="{%url 'sort_byprice_desc' service_category_id=category.id %}">By price(desc)</option>
+  </select>
+</div>
+
+<br><br>
+
+<h3 id="category_name">{{category.name}}</h3>
+<hr class="service_hr"><br>
+<div class="services_list">
+  <table>
+    {% for service in services %}
+        <tr class="tr_space">
+          {% if user.is_authenticated and request.user.is_superuser %}
+            <td><span class="span_services">{{ service.name }}</span></td>
+            <td>.............</td>
+            <td><span class="span services">{{ service.price }} €</span></td>
+            <td>.............</td>
+    
+            {% for key, value in dict.items %}
+              {% if key == service.name %}
+                <td><b>{{ value }} min</b></td>
+              {% endif %}
+            {% endfor %}
+    
+            <td>.............</td>
+            <td><a href="{% url 'update_service' service_id=service.id %}"><button class="icons" style="color:#bdb2b2; font-size: 20px;"><i class="fa fa-edit"></i></button></a></td>
+            <td><a href="{% url 'delete_service' service_id=service.id %}"><button class="icons" style="color:#bdb2b2; font-size: 20px;"><i class="fa fa-trash"></i></button></a></td>
+              
+        {% else %}
+          <td><span class="span_services" >{{ service.name }}</span></td>
+          <td>.............</td>
+          <td><span class="span services">{{ service.price }} €</span></td>
+          <td>.............</td>
+
+        {% for key, value in dict.items %}
+          {% if key == service.name %}
+            <td><b><span>{{ value }} min</span></b></td>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </table>
+</div>
+
+
+{% endblock %}

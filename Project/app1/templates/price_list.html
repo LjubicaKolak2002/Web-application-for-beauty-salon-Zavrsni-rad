@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block price_list_block %}
+
+<style>
+    #price_title {
+        font-size: 28px;
+        position: relative;
+        top: 97px;
+        font-family: 'Times New Roman', Times, serif;
+        color:#000000e6;
+        background-color:#fff;
+        opacity: .6;
+    }
+
+    .price_category {
+        font-size: 22px;
+        position: relative;
+        top: 6px;
+        left: 220px;
+        font-family: 'Brush Script Std';
+    }
+
+    .price_card {
+        width: 65%;
+        position: relative;
+        left: 300px;
+        bottom: 20px;
+    }
+
+    #price_table {
+        display: flex;
+        justify-content: center;
+    }
+
+    .price_image {
+        position: relative;
+        top: 150px;
+        right: 90px;
+    }
+
+    .price_hr {
+        width: 70%;
+        border-radius: 2px;
+        background-color:grey;
+        position: relative;
+        top: 12px;
+        left: 130px;
+    }
+</style>
+<h3 id="price_title"> Our prices</h3>
+
+{% for category in categories %}
+<div class="price_card">
+    <table id="price_table"> 
+        <img src='{{ MEDIA_URL }}{{ category.image.url }}' width="250px" height="180" class="price_image">  
+        <h4 class="price_category">{{category.name}}</h4><hr class="price_hr"><br>
+        {% for service in services %}
+            <div class="price_services">
+                {% if category.id == service.category.id %}
+                <tr>
+                    <td>{{service.name}}</td>
+                    <td>.................................................</td>
+                
+                    <td>{{service.price}} €</td>
+                </tr>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </table>
+
+</div>
+{% endfor %}
+
+{% endblock %}

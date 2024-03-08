@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block employees_list_block %}
+
+<style>
+    
+    #list_title {
+        font-family:  Arial, Helvetica, sans-serif;
+        font-size: 25px;
+        position: relative;
+        margin-left: 85px;
+        top: 50px; 
+        font-weight: 400;
+    }
+
+    #users_table {
+        position: relative;
+        left: 75px;
+        top: 25px;
+    }
+
+    .icons_new_employee {
+        position: relative;
+        top: -16px;
+        left: 57px;
+    }
+
+    #search_input {
+        height: 26px;
+    }
+
+    .searchBar {
+        position: relative;
+        margin-left: 80%;
+        top: 50px;
+    }
+
+    
+    .spaced-table {
+        border-collapse: collapse;
+    }
+    .spaced-table th,
+    .spaced-table td {
+        padding: 8px;
+    }
+    .spaced-table th:not(:last-child),
+    .spaced-table td:not(:last-child) {
+        padding-right: 80px; 
+    }
+
+</style>
+
+<div class="searchBar">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" id="search_input">
+            <button class="icons" style="color:#f77e7e;font-size: 20px;"><i class="fa fa-search"></i></button></a>
+          </form>
+        </div>
+    </nav><br>
+</div>
+
+<h2 id="list_title">List of employees</h2><br><br>
+<a href="{% url 'add_employee' %}"><button class="icons_new_employee" style="color:#f77e7e;font-size:25px;"><i class="fa fa-user-plus"></i></button></a>
+<table id="users_table" class="spaced-table">
+    <tr>
+        <th>Employee</th>
+        <th>Email</th>
+        <th>Category</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+    </tr>
+    {% for employee in employees %}
+        <tr>
+            <td>{{employee.first_name}} {{employee.last_name}}</td>
+            <td>{{employee.email}}</td>
+            <td>
+                {% for category in employee.category.all %}
+                    {{category.name}}
+                {% endfor %}
+            </td>
+            <td><a href="{%url 'update_employee' employee_id=employee.id %}"><button class="icons" style="color:#bdb2b2; font-size: 18px;"><i class="fa fa-edit"></i></button></a></td></a></td>
+            <td><a href="{%url 'delete_employee' employee_id=employee.id %}"><button class="icons" style="color:#bdb2b2; font-size: 18px;"><i class="fa fa-trash"></i></button></a></td></a></td>
+        </tr>
+
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block add_user_block %}
+
+<style>
+      .new_user_card {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 380px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 150px;
+        height: 680px;
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        left: 8%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 30px;
+        
+    }
+
+    .formFields input {
+        width: 300px;
+    }
+
+    .formFields input {
+        margin-bottom: 12px; 
+    }
+
+
+    #title_new_user {
+        color: #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .add_user_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 125px;
+        cursor: pointer;
+        position: relative;
+        left: 30px;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+
+
+</style>
+<form method="post">
+    <div class="new_user_card">
+        <h3 id="title_new_user">Adding a new user</h3><br><br>
+        <div class="formFields">
+            {{form.as_table}}
+            {% csrf_token %}
+        </div>
+        <br>
+        <input type="submit" value="Add user" class="add_user_btn">
+    </div>
+</form>
+
+{% endblock %}

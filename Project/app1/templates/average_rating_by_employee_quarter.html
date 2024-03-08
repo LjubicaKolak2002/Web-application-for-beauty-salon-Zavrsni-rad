@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block employee_per_quarter_block %}
+
+<style>
+    .top_employees_title {
+        color:  #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        position: relative;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    #one_employee_year {
+        position: relative;
+        margin-left: 700px;
+        font-family: system-ui;
+    }
+
+    .quarter-row {
+        display: flex;
+    }
+
+    .quarter-column {
+        flex: 1;
+        padding: 0 7px;
+    }
+
+    .vertical-line {
+        width: 1px;
+        background-color: #ccc;
+        margin: 7px 0;
+    }
+
+    #year-selector {
+        clear: both;
+    }
+
+    #quarter_title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      color: #f77e7e;
+    }
+
+    .quarter-column {
+        flex: 1;
+        padding: 6px; 
+        text-align: center;
+        font-family: system-ui;
+    }
+
+
+</style>
+<br><br><br><br>
+<h2 class="top_employees_title">Top three employees so far for the year: {{ current_year }}</h2><br><br>
+{% for employee, rating in top_three_employees %}
+    <span id="one_employee_year">{{ employee.first_name }} {{employee.last_name}} - {{ rating }} </span><br><br>
+{% endfor %}
+
+
+<br><br><h2 class="top_employees_title">Top three employees for Each Quarter of the year: {{ selected_year}}</h2><br><br>
+<div class="quarter-row">
+    {% for quarter, employees in quarterly_ratings.items %}
+        <div class="quarter-column">
+            <p id="quarter_title">Quarter {{ quarter }}</p><br>
+            {% if employees %}
+                {% for employee, rating in employees %}
+                    {% if rating > 0 %}
+                        <span id="one_employee_quarter">{{ employee.first_name }} {{ employee.last_name }} - {{ rating }}  </span><br><br>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <span>No rating in this quarter</span><br><br>
+            {% endif %}
+        </div>
+        {% if not forloop.last %}
+            <div class="vertical-line"></div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

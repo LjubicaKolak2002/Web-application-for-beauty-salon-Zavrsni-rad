@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block employee_app_future_block %}
+
+<style>
+    .day-container {
+        text-align: center;
+    }
+    
+    .day-box{
+        background-color: #f9f9f9;
+        width: 100%;
+    }
+    
+    .day-title {
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-family: 'Brush Script Std';
+        text-align: center;
+        font-size: 18px;
+        color:rgb(102, 99, 99);
+    }
+    
+    .appointment-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        position: relative;
+        top: 150px;
+    }
+    
+    .appointments-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 10px 0;
+        white-space: nowrap;
+    }
+    
+    .appointment {
+        width: 250px;
+        padding: 15px;
+        font-size: 13px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        font-family: 'system-ui';
+    }
+
+    .app_title {
+      font-family: 'Brush Script Std';
+      text-align: center;
+      font-size: 30px;
+      color:rgb(102, 99, 99);
+      position: relative;
+      font-weight: 500;
+      top: 90px;
+    }
+
+    .cancel-button {
+        background-color: #f77e7e;
+        border: none;
+        border-radius: 5px;
+        font-size: 13px;
+        padding: 4px 8px;
+              
+    }
+</style>
+
+<h1 class="app_title">Upcoming Appointments</h1>
+{% if grouped_upcoming_appointments %}
+    <div class="appointment-list">
+    {% for date, appointments in grouped_upcoming_appointments.items %}
+        <div class="day-container">
+            <div class="day-box">
+                <div class="day-title">{{ date }}</div>
+            </div>
+            <div class="appointments-container">
+            {% for appointment in appointments %}
+                <div class="appointment">
+                    <strong style="color:#f77e7e">{{ appointment.time }}</strong><br>
+                    {{ appointment.user }}<br>
+                    {{ appointment.service }}<br><br>
+                    <div class="cancel-button-container">
+                        <button class="cancel-button"><a href="{% url 'delete_appointment_confirmation' user_id=appointment.user.id appointment_id=appointment.id %}" style="text-decoration: none;color: white">CANCEL</a></button>
+                      </div>
+                </div>
+            {% endfor %}
+            </div><br><br>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+      <p style="position:relative;text-align: center;top: 120px;font-family: 'system-ui';">No upcoming appointments.</p>
+{% endif %}
+
+
+
+{% endblock %}

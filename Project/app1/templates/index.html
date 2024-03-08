@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+{% block index_block %}
+
+<style>
+    .review {
+      display: none;
+      width: 500px;
+      font-size: 15px;
+      font-family:system-ui;
+
+    }
+
+    .review.active {
+      display: block;
+    }
+
+    #next_button {
+      position: relative;
+      left: 720px;
+      top: 380px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color:#f77e7e;
+      color: white;
+      border:  #f77e7e;
+    }
+
+    #next_button:hover {
+      width: 38px;
+      height: 38px;
+    
+
+    }
+
+    #prev_button:hover {
+      width: 38px;
+      height: 38px;
+    
+    }
+    #prev_button {
+      position: relative;
+      top: 380px;
+      left: 700px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: #f77e7e;
+      color: white;
+      border: #f77e7e;
+    }
+
+    #hr_recension {
+      position: relative;
+      color:grey;
+      top: 250px;
+      left: 25%;
+      width: 50%;
+    }
+
+
+    #category_tag {
+        font-family: 'Brush Script Std';
+        text-align: center;
+        font-size: 35px;
+        color: grey;
+        position: relative;
+        bottom: 120px;
+    
+    }
+
+
+    #recension_tag {
+        font-family: 'Brush Script Std';
+        text-align: center;
+        font-size: 35px;
+        color: grey;
+        position: relative;
+        top: 240px;
+        
+    }
+    .image-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center; 
+        text-transform: uppercase;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+        
+    .image-box {
+        flex: 0 0 calc(23% - 8px);
+        box-shadow: 0 4px 8px 0 rgba(129, 128, 127, 0.8);
+        height: 260px;
+        margin: 0 30px;
+        margin-top: 30px;
+        text-align: center;
+        position: relative;
+        top: 10px;
+    }
+
+    #our_services_hr {
+        width: 30%;
+        position: relative;
+        left: 35%;
+        color: grey;
+        bottom: 100px;
+    }
+
+    /*recenzije*/
+    .review {
+        position: relative;
+        text-align: center;
+        width: 500px;
+        margin-left: 500px; 
+        top: 300px;
+        
+    }
+
+ 
+    button:hover {
+      background-color:transparent;
+      color: transparent;
+      border: 2px solid white;
+    }
+
+    a:hover {
+      background-color: transparent;
+    }
+  
+
+    .btn_home {
+        position: relative;
+        left: -40px;
+        top: -320px;
+        position: relative;
+        right: 350px;
+        top: -320px;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        bottom: 500px;
+        color: #fff;
+        padding: 15px 45px;
+        border-radius: 100px;
+        background-color: #ff9999;
+        z-index: 10;
+    }
+
+    .btn_home2 {
+        position: relative;
+        right: 40px;
+        top: -320px;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        bottom: 500px;
+        color: #fff;
+        padding: 15px 45px;
+        border-radius: 100px;
+        background-color: #ff9999;
+        z-index: 10;
+    }
+
+
+    #home_picture {
+      position: relative;
+      top: 20px;
+      width: 100%;
+      filter: brightness(60%); 
+      z-index: 5 !important;
+    }
+
+    .picture {
+      z-index: 2 !important;
+    }
+
+    #text_home {
+      z-index: 10;
+      color:white;
+      position: relative;
+      bottom: 400px;
+      margin-left: 70px;
+      font-size: 56px;
+      font-weight: 200;
+      word-spacing: 10px;
+      font-family:'Times New Roman', Times, serif
+    }
+
+    #href_home,
+    #href_home2 {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: transparent;
+    }
+
+    #text {
+      z-index: 10;
+      position: relative;
+      bottom: 380px;
+      font-size: 22px;
+      margin-right: 40px;
+      color: white;
+      font-family:system-ui;
+      font-weight: 100;
+    }
+
+    #average_rating {
+      position: relative;
+      top: 270px;
+      margin-left: 42%;
+      font-family: system-ui;
+      color: #f77e7e;
+      font-weight: 600;
+    }
+
+
+</style>
+
+
+<div class="picture">
+    {% load static %} <img src="{% static 'images/woman-massage.jpg' %}" id="home_picture" height="600px">
+    {% if user.is_authenticated %}
+      <div id="home_text">
+        <h2 id="text_home">Relax, Enjoy and<br> Love Yourself</h2>
+        <h2 id="text">Welcome to the page of our salon!<br>Take the opportunity and book your appointment just now!<br>
+          If you have already tried  some of our services, <br>you can leave your reviews and thus help improve our salon.</h2>
+      </div>
+      <button class="btn_home"><a href="{%url 'reservation_service' %}" id="href_home" >BOOK NOW</a></button>
+      <button class="btn_home2"><a href="{%url 'add_review' %}" id="href_home2">ADD REVIEW</a></button>
+      
+    {% elif request.user.is_anonymous%}
+      <div id="home_text">
+        <h2 id="text_home">Relax, Enjoy and<br> Love Yourself</h2>
+        <h2 id="text">Welcome to the page of our salon!<br>Take the opportunity and book your appointment just now!<br>
+          If you have already tried  some of our services, <br>you can leave your reviews and thus help improve our salon.</h2>
+      </div>
+      <button class="btn_home2"><a href="{%url 'login' %}" id="href_home">Login</a></button>
+      <button class="btn_home"><a href="{%url 'register' %}" id="href_home" >Register</a></button>
+    {% endif %}
+</div>
+
+
+<a name="services"></a>
+<h2 id = "category_tag">Our services</h2> <hr id="our_services_hr">
+<div class="image-container">
+  {% for category in categories %}
+      <div class="image-box">
+        <a href="{%url 'print_services' category_id=category.id %}"><img src='{{ MEDIA_URL }}{{ category.image.url }}' width="300px" height="180"/ class="category_picture"></a>
+        <br><br><span id="service_name">{{category}}</span>
+    </div>
+  {% endfor %}
+</div>
+
+<h2 id = "recension_tag">What our clients say about us</h2><hr id="hr_recension">
+
+<div id="reviews_container">
+   <div id="average_rating">Average rating of the salon: {{average_rating}}</div>
+    {% for key, value in dict.items %}
+    <div class="review">
+        <p id="review_text">"{{ value.text }}"</p><br>
+        <span style="color:#f2db58">{{ key.0 }}</span><br><br>
+        <p><b><i>{{ value.user }} </i></b> </p>
+        {% if user.is_authenticated and request.user.is_superuser %}
+            <br><a href="/delete_review/{{ value.id }}"><button class="icons" style="color: rgb(164, 23, 23); font-size: 18px;"><i class="fa fa-trash"></i></button></a>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+  <button id="prev_button">❮</button>
+  <button id="next_button">❯</button>
+</div>
+
+
+<script>
+    var reviews = document.querySelectorAll('.review');
+    var currentIndex = 0; //indeks trenutno prikazane recenzije
+
+    function showReview(index) { //prikazuje recenziju na osnovu njenog indeksa, skida klasu active sa svih recenzija i dodaje je samo onoj sa datim indeksom
+      for (var i = 0; i < reviews.length; i++) {
+        reviews[i].classList.remove('active');
+      }
+      reviews[index].classList.add('active');
+    }
+
+    document.getElementById('prev_button').addEventListener('click', function() {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = reviews.length - 1; //da se ide unazad
+      }
+      showReview(currentIndex);
+    });
+
+    document.getElementById('next_button').addEventListener('click', function() {
+      currentIndex++;
+      if (currentIndex >= reviews.length) {
+        currentIndex = 0;
+      }
+      showReview(currentIndex);
+    });
+
+    showReview(currentIndex); // kako bi se inicijalno prikazala recenzija sa trenutnim indeksom (koji je početno postavljen na 0).
+</script>
+{% endblock %}
+

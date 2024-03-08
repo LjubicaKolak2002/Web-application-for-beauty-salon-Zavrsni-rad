@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block delete_service_block %}
+
+<h3>Deletion the service</h3>
+<form method="POST">
+    <table>
+        <tr>
+            {{form}}
+            {% csrf_token %}
+        </tr>
+    </table><br><br>
+    <input type="submit" value="Delete">
+</form>
+
+{% endblock %}

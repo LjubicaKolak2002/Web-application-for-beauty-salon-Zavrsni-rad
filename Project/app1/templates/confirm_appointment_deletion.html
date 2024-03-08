@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block delete_appointment_block %}
+
+<style>
+        .delete_card {
+                width: 50%;
+                height: 200px;
+                text-align: center;
+                font-size: 16px;
+                position: relative;
+                left: 25%;
+                top: 150px;
+
+        }
+
+        #no_btn {
+                position: relative;
+                border: none;
+                padding: 5px 10px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                color: white;
+                border-radius: 5px;
+                background-color:#801010;
+        }
+
+        #yes_btn {
+                position: relative;
+                border: none;
+                padding: 5px 10px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                color: white;
+                border-radius: 5px;
+                background-color: #1f651f;
+        }
+
+        #confirmation_title {
+                color:rgb(102, 99, 99);
+                text-align: center;
+                font-family: ''Brush Script Std'';
+                font-size: 22px;
+                font-weight: 500;
+                position: relative;
+                top: 90px;
+        }
+
+        #confirmation_form {
+               text-align: center;
+               position: relative;
+               top: 110px;
+               font-family: 'system-ui';
+
+        }
+
+        .yes_button {
+                background-color: #f77e7e;
+                border: none;
+                border-radius: 5px;
+                font-size: 15px;
+                padding: 8px 15px;
+                color: white;
+        }
+
+        .no_button {
+                background-color: rgb(154, 152, 152);
+                border: none;
+                border-radius: 5px;
+                font-size: 15px;
+                padding: 8px 15px;
+                color: white;
+        }
+</style>
+ 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Appointment cancellation confirmation</title>
+</head>
+<body>
+    <h1 id="confirmation_title">Appointment cancellation confirmation</h1>
+    <div id="confirmation_form">
+        <p>Are you sure you want to cancel the appointment for "{{ service }}" scheduled for {{ date }} at {{ time }}?</p>
+        <form method="post" action="{% url 'delete_appointment_confirmation' user_id=user appointment_id=appointment %}">
+                {% csrf_token %}
+                {% if request.user.is_authenticated and request.user.role == 'employee' %}
+                        <br><button type="submit" name="yes" class="yes_button">Yes, I cancel</button>
+                        <button class="no_button"><a href="{% url 'employee_appointments_future' user_id=user %}" style="text-decoration: none;color:white">No, I give up</a></button>
+                {% elif request.user.is_authenticated and request.user.role == 'user' %}
+                        <br><button type="submit" name="yes" class="yes_button">Yes, I cancel</button>
+                        <button class="no_button"><a href="{% url 'user_appointments_future' user_id=user %}" style="text-decoration: none;color:white">No, I give up</a></button>
+                {% endif %}
+        </form>
+   </div>
+</body>
+</html>
+
+{% endblock %}

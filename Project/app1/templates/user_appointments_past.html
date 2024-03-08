@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% block user_appointments_past_block %}
+
+<style>
+    .appointment-item {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 7px;
+        width: 60%;
+        position: relative;
+        left: 20%;
+        top: 150px;
+        height: 65px;
+        font-size: 15px;
+        font-family: system-ui;
+    }
+
+    .appointments-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px; 
+    }
+
+    .user_appointment {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .rating-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .appointment-details {
+        flex: 1;
+    }
+
+    .service-name {
+        font-weight: bold;
+    }
+
+    .employee-name {
+        position: relative;
+        top: 7px;
+        color: rgb(102, 99, 99);
+        font-family: system-ui;
+    }
+
+    .appointment-date-time {
+        position: relative;
+        bottom: 6px;
+    }
+
+    .icon-button {
+        margin-right: 5px;
+    }
+
+    .date,
+    .time {
+        display: block;
+    }
+
+    .appointment-date-time {
+        display: flex;
+        align-items: center;
+    }
+
+    .date-time-container {
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .icon-button {
+        margin-right: 5px;
+    }
+
+    .date,
+    .time {
+        display: block;
+    }
+
+    #my_app_title {
+        text-align: center;
+        position: relative;
+        top: 90px;
+    }
+
+    .appointment-item {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .appointment-details {
+        flex: 1;
+    }
+
+    .service-name {
+        font-weight: bold;
+        position: relative;
+        top: 7px;
+    }
+
+    .appointment-date-time {
+        display: flex;
+        align-items: center;
+    }
+
+    .date-time-container {
+        display: flex;
+        align-items: center;
+        margin-right: 13px;
+    }
+
+    .icon-button {
+        margin-right: 5px;
+    }
+
+    .date,
+    .time {
+        display: block;
+    }
+
+    .cancel-button-container {
+        margin-left: auto;
+    }
+
+    .cancel-button {
+        background-color:  rgb(245, 219, 154);
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        padding: 5px 10px;
+    }
+
+    .star {
+        color: #ccc; 
+        cursor: pointer;
+    }
+
+    .selected-star {
+        color: #efd56d; 
+    }
+
+    .rating-container {
+        display: none;
+    }
+
+    #my_app_title {
+        font-family: 'Brush Script Std';
+        text-align: center;
+        font-size: 30px;
+        color:rgb(102, 99, 99);
+        position: relative;
+        font-weight: 500;
+        top: 90px;
+    }
+
+    .service-name {
+        position: relative;
+        top: 8px;
+        color: rgb(102, 99, 99);
+        font-family: system-ui;
+    }
+
+    #employee_mark  {
+        position: relative;
+        top: 80%;
+        right: 350px;
+    }
+
+    .toggle-rating {
+        background-color: #f77e7e;
+        border: none;
+        border-radius: 5px;
+        font-size: 12px;
+        padding: 5px 8px;
+        color: #fff;
+        position: relative;
+        top: 10px;
+    }
+
+    .toggle-rating {
+        position: relative;
+        top: -20%;
+    }
+
+    .rating-container {
+        position: relative;
+        top: 18%;
+    }
+
+</style>
+        
+
+
+
+<h2 id="my_app_title">Past appointments</h2>
+<div class="appointments-container">
+    {% for appointment in reviewed_appointments %}
+    <div class="user_appointment">
+        <div class="appointment-item">
+            <div class="appointment-details">
+                <span class="service-name">{{appointment.service}}</span><br>
+                <span class="employee-name">{{appointment.employee}}</span>
+            </div>
+            <div class="appointment-date-time">
+                <div class="date-time-container">
+                    <button class="icon-button" style="color: #f77e7e; background-color: white;border:none;font-size:15px;"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                    <span class="date">{{appointment.date}}</span>
+                </div>
+                <div class="date-time-container">
+                    <button class="icon-button" style="color: #f77e7e;background-color: white;border:none;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true"></i></button>
+                    <span class="time">{{appointment.time}}</span>
+                </div>
+            </div>
+            <div id="employee_mark">Rating: {{ appointment.rating }}</div>
+        </div>
+    </div>
+    {% endfor %}
+
+    
+<br><br><br><br><br><br>
+<h2 id="my_app_title">Unrated appointments</h2>
+    {% for appointment in unreviewed_appointments %}
+    <div class="user_appointment">
+        <div class="appointment-item">
+            <div class="appointment-details">
+                <span class="service-name">{{appointment.service}}</span><br>
+                <span class="employee-name">{{appointment.employee}}</span>
+            </div>
+            <div class="appointment-date-time">
+                <div class="date-time-container">
+                    <button class="icon-button" style="color: #f77e7e; background-color: white;border:none;font-size:15px;"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                    <span class="date">{{appointment.date}}</span>
+                </div>
+                <div class="date-time-container">
+                    <button class="icon-button" style="color: #f77e7e;background-color: white;border:none;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true"></i></button>
+                    <span class="time">{{appointment.time}}</span>
+                </div>
+                <div class="rating-bottun">
+                    <button class="toggle-rating" data-appointment-id="{{ appointment.id }}">Evaluate</button> <!--data-app za identifikaciju termina-->
+                    
+                </div>
+            
+        </div>
+        <div class="rating-container" id="rating-container-{{ appointment.id }}">
+            <form method="post" class="rating-form">
+                {% csrf_token %}
+                <input type="hidden" name="appointment_id" value="{{ appointment.id }}">
+                <div class="rating-stars" id="rating-stars-{{ appointment.id }}">
+                    <input type="hidden" name="rating" id="rating-input-{{ appointment.id }}" value="{{ appointment.rating }}">
+                    <span class="star {% if appointment.rating >= 1 %}selected{% endif %}" data-value="1">&#9733;</span>
+                    <span class="star {% if appointment.rating >= 2 %}selected{% endif %}" data-value="2">&#9733;</span>
+                    <span class="star {% if appointment.rating >= 3 %}selected{% endif %}" data-value="3">&#9733;</span>
+                    <span class="star {% if appointment.rating >= 4 %}selected{% endif %}" data-value="4">&#9733;</span>
+                    <span class="star {% if appointment.rating == 5 %}selected{% endif %}" data-value="5">&#9733;</span>
+                </div>
+            <button type="submit" class="toggle-rating">Evaluate</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleRatingButtons = document.querySelectorAll(".toggle-rating");
+
+        toggleRatingButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const appointmentId = this.getAttribute("data-appointment-id");
+                const container = document.getElementById("rating-container-" + appointmentId);
+                const ratingForm = container.querySelector(".rating-form");
+                container.style.display = "block"; //prikaz forme
+                this.style.display = "none"; 
+                ratingForm.addEventListener("submit", function() { //sakrivanje forme nakon submitanja
+                    container.style.display = "none"; 
+                    button.style.display = "block"; 
+                });
+            });
+        });
+
+        const starsContainers = document.querySelectorAll(".rating-stars");
+
+            starsContainers.forEach(container => {
+                const stars = container.querySelectorAll(".star");
+
+                stars.forEach(star => {
+                    star.addEventListener("click", function() {
+                        const value = this.getAttribute("data-value");
+                        const appointmentId = container.getAttribute("id").replace("rating-stars-", "");
+                        const ratingInput = document.getElementById("rating-input-" + appointmentId);
+
+                        ratingInput.value = value;
+                        stars.forEach(s => s.classList.remove("selected-star"));
+                        for (let i = 0; i < value; i++) {
+                            stars[i].classList.add("selected-star");
+                        }
+                    });
+                });
+            });
+    });
+       
+</script>
+
+{% endblock %}

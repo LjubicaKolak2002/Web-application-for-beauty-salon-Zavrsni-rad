@@ -1,0 +1,306 @@
+{% extends 'base.html' %}
+{% block reservation_details_block %}
+
+
+
+<style>
+    .flatpickr-day.selected {
+        background-color:  #f89696;
+        color: white;
+        border:  rgb(249, 227, 173);
+        font-weight: bold;
+    }
+
+    .flatpickr-day, .flatpickr-month, .flatpickr-weekday, .flatpickr-weekdaycontainer {
+        font-family: Arial, sans-serif;
+    }
+
+    .flatpickr-day {
+        font-size: 14px;
+    }
+
+    .flatpickr-innerContainer .flatpickr-weekdays .flatpickr-weekday{
+        color: white;
+    }
+
+    .flatpickr-month, .flatpickr-weekday {
+        font-size: 16px;
+    }
+    .flatpickr-innerContainer .flatpickr-weekdays .flatpickr-weekday {
+        background-color: #f89696;
+    }
+
+    #id_hours {
+        width: 30%;
+    }
+
+    button {
+        background-color:rgb(249, 227, 173);
+        border: none;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        text-align: center;
+        text-decoration: none;
+        font-size: 13px;
+        bottom: 500px;
+        color:#9e8255;
+        border-radius: 500px;
+        margin: 10px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #reservation_title {
+        font-size: 25px;
+        color: #000000c7;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 100;
+        text-align: center; 
+        margin-top: 15px; 
+        margin-bottom: 10px; 
+    }
+
+
+    .hr_reservation {
+        width: 85%;
+        position: relative;
+        top: -5px;
+        margin-right: 35px;
+    }
+
+    #time_title {
+        color:  #9e8255;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+
+    }
+
+    .booking_card {
+        border: 1px solid #ccc;
+        width: 65%;
+        height: 440px;
+        padding: 30px;
+        margin-top: 4%;
+        margin-left: 13%;
+       
+    }
+
+    #employee,
+    #date,
+    #id_hours {
+        position: relative;
+        right: 330px;
+    }
+
+    #employee {
+        height: 25px;
+    }
+
+    #id_hours {
+        height: 25px;
+        width: 170px;
+    }
+
+    #submitBtn {
+        background-color: #f77e7e;
+        border: none;
+        height: 30px;
+        width: 110px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        color:#fff;
+        margin: 10px;
+        font-weight: bold;
+        top: 7px;
+        position: relative;
+        margin-left: 710px;
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+    .input-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 15px;
+        margin-left: 50px;
+    }
+
+    .input-container label {
+        font-size: 14px;
+        width: 60%; 
+        
+    }
+
+    .input-container input,
+    .input-container select {
+        flex: 1;
+        padding: 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .input-container {
+        position: relative;
+        top: 60px;
+    }
+
+    #reservation_text {
+        font-family: system-ui;
+        position: relative;
+        margin-left: 25%;
+        bottom: 12px;
+    }
+
+    #date,
+    #employee {
+        position: relative;
+        margin-left: 15px;
+    }
+
+    #date {
+        height: 20px;
+      
+        
+    }
+    #employee {
+         height: 27px;
+    }
+
+    #id_hours {
+        height: 27px;
+        margin-left: 13px;
+    }
+
+    label {
+        font-family: system-ui;
+        font-size: 18px;
+        color: rgb(34, 33, 33);
+        font-weight: 600;
+    }
+
+    
+</style>
+
+<form action="" method="POST" data-url="{% url 'get_employees_hours' %}" id="formID">
+    {% csrf_token %}
+
+    <div class="booking_card">
+        <div id="reservation_title">{{service.name}}</div><br>
+        <div id="reservation_text">Check out our availability and book the date and time that works for you</div>
+        <div class="input-container">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" class="data">
+        </div>
+        <div class="input-container">
+            <label for="employee">Employee</label>
+            <select id="employee" name="employee" class="data">
+                <option disabled selected>Employees</option>
+                {% for employee in employees %}
+                    <option value="{{ employee.id }}">{{ employee }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="noAppointments"><p id="textApp"></p></div>
+        <div class="input-container">
+            <label for="id_hours">Available Time</label>
+            <select id="id_hours" name="id_hours" class="data"></select>
+        </div>
+        <input type="hidden" id="service" name="service" value={{service.id}}>
+        <input type="submit" value="BOOK" id="submitBtn">
+    </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>   
+    flatpickr("#date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        maxDate: new Date().fp_incr(90),
+        disable: [
+            function(date) {
+                return (date.getDay() === 6 || date.getDay() === 0);
+            }
+        ]
+    });
+
+
+    document.getElementById("employee").addEventListener("change", function () {
+        document.getElementById("id_hours").innerHTML = ""; 
+        let url = $("#formID").attr("data-url");  //dohvaca URL 
+        let employee = $(this).val(); 
+        let date = document.getElementById("date").value;
+        let service = document.getElementById("service").value;
+        let current_date = new Date()
+        let formatted = current_date.getFullYear() + '-' +('0' + (current_date.getMonth() + 1)).slice(-2) + '-' +('0' + current_date.getDate()).slice(-2)
+        let current_time = ('0' + current_date.getHours()).slice(-2) + ':' + ('0' + current_date.getMinutes()).slice(-2) + ':' +  ('0' + current_date.getSeconds()).slice(-2);
+        console.log(date, formatted);
+        let bool = false;
+        $.ajax({ 
+            type: 'GET',
+            url: url,
+            data: {
+                'employee': employee,
+                'date': date,
+                'service_id': service,
+            },
+            dataType: 'json',
+            success: function(response) {
+                let select = document.getElementById("id_hours");
+                if (response.hours.length < 1){
+                    let option = document.createElement("option");
+                    option.value = "-";
+                    option.innerHTML = "-";
+                    bool = true;
+                    select.appendChild(option);
+                }else {
+                    for (let i = 0; i < response.hours.length; i++) {
+                        let option = document.createElement("option");
+                        if (date === formatted){
+                            if ((response.hours[i]["time"] >= current_time)){
+                                console.log("YES: ", response.hours[i]["time"])
+                                option.value = response.hours[i]["time"];
+                                option.innerHTML = response.hours[i]["time"];
+                                select.appendChild(option);
+                            } 
+                        } else {
+                            option.value = response.hours[i]["time"];
+                            option.innerHTML = response.hours[i]["time"];
+                            select.appendChild(option);
+                            bool = true;
+                        }
+                    
+                    }
+                }
+
+                
+            }
+        })
+    })
+
+    $(document).ready(function(){
+        $('#formID').on('submit', function(e){
+            let employee = $(this).val(); 
+            let date = document.getElementById("date").value;
+            let service = document.getElementById("service").value;
+            let reserved_time = document.getElementById("id_hours").value;
+            console.log(reserved_time)
+            $.ajax({ 
+                method:'POST',
+                url:'/get_employees_hours/',
+                success: function() {
+                    alert('Data Successfully Posted');
+                    },
+                });
+            });
+        });
+
+
+</script>
+
+{% endblock %}

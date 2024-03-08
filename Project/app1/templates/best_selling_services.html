@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block best_selling_services_block %}
+
+<style>
+    
+    #best_service_t2 {
+        font-family:  Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        color: #f77e7e;
+        position: relative;
+        margin-left: 90px;
+        top: 80px;
+    }
+
+    #statistics_table_price {
+        position: relative;
+        margin-left: 80px;
+        top: 120px;
+        font-size: 16px;
+    }
+
+    #sortOption {
+        position: relative;
+        margin-left: 1280px;
+        bottom: -90px;
+    }
+
+    #sort {
+        height: 22px;
+    }
+
+    .spaced-table {
+        border-collapse: collapse;
+    }
+    .spaced-table th,
+    .spaced-table td {
+        padding: 8px; 
+    }
+    .spaced-table th:not(:last-child),
+    .spaced-table td:not(:last-child) {
+        padding-right: 110px; 
+    }
+
+</style>
+<div id="sortOption">
+    <select name="sort_options" id="sort" onchange="location = this.value;">
+        <option disabled selected>SORT BY:</option>
+        <option value="{%url 'best_selling_services' %}">Nothing</option>
+        <option value="{%url 'best_selling_services_num' %}">Number of services</option>
+        <option value="{%url 'best_selling_services_price' %}">Price</option>
+    </select>
+</div>
+  
+<h2 id="best_service_t2">List of performed services to date - {{today}}</h2>
+<table id="statistics_table_price" class="spaced-table">
+    <tr>
+        <th>Service</th>
+        <th>Total earnings</th>
+        <th>Number of service</th>
+    </tr>
+{% for service in services %}
+
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.total_earnings}} €</td>
+        <td>{{service.total_appointments}}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

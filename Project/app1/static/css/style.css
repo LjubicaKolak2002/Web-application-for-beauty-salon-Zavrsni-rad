@@ -1,0 +1,306 @@
+
+
+
+
+/*
+.category_btn {
+    background-color: #f0d09c;
+    border: none;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    border-radius: 12%;
+}*/
+
+.category_picture:hover{
+    width: 320px;
+    height: 200px;
+    /*box-shadow: 4px 6px 6px 4px  rgb(182, 179, 179);*/
+
+}
+
+/*print services*/
+h3 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+.icons {
+    background-color: white;
+    border: none;
+}
+
+.icons_new_user {
+    
+    background-color: white;
+    border: none;
+    position: relative;
+    bottom: 53px;
+    margin-left: 190px;
+}
+
+
+.icons_new_employee {
+    
+    background-color: white;
+    border: none;
+    position: relative;
+    bottom: 53px;
+    margin-left: 250px;
+}
+
+
+
+.price_services {
+    font-size: 18px;
+}
+
+#title_service {
+    position: relative;
+    top: 20px;
+    font-size: 22px;
+    text-align: start;
+    left: 12px;
+}
+
+
+
+
+
+.services_list {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+
+
+
+
+
+.picture {
+    position: relative;
+    text-align: center;
+    top: 25px;
+}
+
+
+
+.nav-button:focus,.nav-button:hover {
+    color: #fff;
+}
+
+#href_home {
+    color: white;
+    text-decoration: none;
+    
+
+}
+.home_text{
+    position: relative;
+    bottom: 540px;
+    margin-left: 650px;
+}
+
+#home_title {
+    font-size: 60px;
+    font-family: 'Brush Script Std'
+}
+
+
+#home_text {
+    font-size: 30px;
+}
+
+
+/*navbar dropdown
+ul li ul.dropdown li {
+    display: block;
+}
+
+
+ul li ul.dropdown {
+    position: absolute;
+    z-index: 999;
+    display: block;
+}
+
+
+ul li:hover ul.dropdown {
+    display: block;
+}
+
+#navbar_dropdown {
+    display: block;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; 
+}*/
+
+
+
+
+
+
+
+
+/*
+#filterButton {
+    position: relative;
+    margin-left: 500px;
+    bottom: 40px;
+}*/
+
+#sortOption {
+    position: relative;
+    margin-left: 100px;
+    bottom: 80px;
+}
+
+/*
+
+.daily_earnings {
+    position: relative;
+    top: 20px;
+    text-align: center;
+    border:#ae9469
+}
+
+.detail_main {
+    position: relative;
+    text-align: center;
+}
+
+.detail_main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Adjust this value as needed */
+  /*
+  #services_detail,
+  #employees_detail {
+    border: 1px solid #912424;
+    padding: 10px;
+    align-self: flex-start;
+  }*/
+
+
+
+
+
+
+#formID {
+    position: relative;
+    top: 40px;
+    margin: 18px;
+    left: 30px;
+}
+
+#service_name {
+    font-family: 'Brush Script Std';
+    font-size: 17px;
+}
+
+
+#href_book {
+    text-decoration: none;
+    color: white;
+    font-family: 'Brush Script Std';
+}
+
+
+table, th, td {
+   
+    padding: 5px;
+}
+
+table {
+    border-spacing: 15px;
+}
+
+
+th {
+    text-align: left;
+}
+
+#statistics_price {
+    position: relative;
+    
+
+}
+
+
+
+
+.form_login {
+    
+       
+        box-shadow: 0 4px 8px 0 rgba(129, 128, 127, 0.8);
+        height: 260px;
+        margin: 0 30px;
+        margin-top: 50px;
+        text-align: center;
+        position: relative;
+ 
+}
+
+
+#employee-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .employee-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .employee-details {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .employee-name {
+    font-weight: bold;
+  }
+  
+  .employee-specialization {
+    color: gray;
+    font-size: 18px;
+  }
+  
+  .employee-email,
+  .employee-phone {
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .employee-picture {
+    margin-bottom: 10px;
+  }
+  
+
+	
+
+  
+
+
+
+
+
+
+
+
+
+

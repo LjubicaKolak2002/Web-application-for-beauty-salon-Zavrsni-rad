@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block update_employee_block %}
+
+
+<style>
+    .update_employee_card {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 380px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 150px;
+        height: 720px;
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        left: 8%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 20px;
+    }
+
+    .formFields input {
+        width: 300px;   
+    }
+
+
+    #update_employee_title {
+        color: #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .update_employee_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 9px 130px;
+        cursor: pointer;
+        position: relative;
+        left: 30px;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+
+    .formFields input[type="checkbox"] {
+        width: 20px;
+    }
+</style>
+
+<form enctype="multipart/form-data" method="post">
+    <div class="update_employee_card">
+    <h3 id="update_employee_title">Update employee</h3><br><br>
+        <div class="formFields">
+            {{form}}
+            {% csrf_token %}
+        </div><br><br>
+        <input type="submit" value="Update" class="update_employee_btn">
+    </div>
+</form>
+{% endblock %}

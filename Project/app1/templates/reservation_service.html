@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block reservation_service_block %}
+
+<style>
+  
+  #title_reservation_service {
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+      top: 90px;
+      margin-left: 70px;
+      font-size: 20px;
+      font-weight: 600;
+  }
+
+  #book_service {
+    background-color:  #f77e7e;
+    border:   #f77e7e;
+    border-radius: 5px;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+
+  #service_table {
+    position: relative;
+    margin-left: 75px;
+    top: 90px;
+    font-family: system-ui;
+  }
+
+  #href_book {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+
+  #category_name {
+    color: rgb(34, 33, 33);
+    font-weight: 600;
+  }
+
+
+</style>
+<script>
+  let previousOpen = "";
+
+  function showServices(categoryId) {
+    let data = document.getElementById("hideDiv" + categoryId);
+    let displayValue = "";
+
+    if (data.style.display == "") {//element ce se sakriti kada se sljedeći put pozove funkcija.
+      displayValue = "none";
+    }
+
+    if (previousOpen && previousOpen !== data) { //samo jedan element može otvoriti u isto vrijeme.
+      previousOpen.style.display = "none";
+    }
+
+    data.style.display = displayValue; //display svojstvo trenutnog elementa na vrijednost koja je pohranjena u displayValue. i
+    previousOpen = data; //previousOpen na trenutni element
+}
+
+</script>
+
+<div class="reservation_table">
+<table id="service_table">
+  <span id="title_reservation_service">Select a service:</span><br><br>
+  {% for category in categories %}
+    <tr>
+      <td id="category_name">{{ category }}</td>
+      <td><button onclick="showServices('{{category.id}}')" style="background-color: white;border:none; font-size:28px;"><i class="fa fa-angle-down" style="font-size:26px"></i></button></td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div id="hideDiv{{category.id}}" style="display:none">
+          <table> 
+            {% for service in services %}
+              {% if category.id == service.category.id %}
+                <tr>
+                  <td>{{ service }}</td>
+                  <td>
+                    <button id="book_service"><a href="{% url 'reservation_details' service_id=service.id user_id=user.id %}" id="href_book">Book now</a></button>
+                  </td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+  </table>
+</div>
+{% endblock %}
+

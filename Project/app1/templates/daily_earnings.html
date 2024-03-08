@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block daily_earnings_block %}
+
+<style>
+    .container {
+        position: relative;
+        top: 120px;
+        display: flex;
+        justify-content: center;
+    }
+     .earnings_container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        width: 54%;
+        position: relative;
+        top: 50px;
+        right: 60px;
+        justify-content: center;
+    }
+    .earning_item {
+        border: 1px solid #ccc;
+        padding: 15px;
+        width: 295px;
+        font-weight: bolder;
+        font-size: 20px;
+    }
+
+    #earnings_title {
+        position: relative;
+        left: 30%;
+        color:rgb(114, 109, 109);
+        bottom: 9px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #earnings_date {
+        color: grey;
+    }
+
+    #earnings_money {
+        color: #d25a5a;
+        position: relative;
+        left: 160px;
+    }
+
+    #total_money {
+        color: #d25a5a;
+        position: relative;
+        bottom: 20px;
+        font-size: 22px;
+        top: 75px;
+        margin-left: 286px;
+  }
+</style>
+
+<div class="container">
+    <h2 id="earnings_title">Salon earnings per day</h2><br><br>
+    <div class="earnings_container">
+        {% for earning in earnings %}
+        <div class="earning_item">
+            <span id="earnings_date">{{ earning.date|date:"d.m.Y" }}</span>
+            <span id="earnings_money">{{ earning.earning }} €</span>
+        </div>
+        {% endfor %}
+    <span id="total_money"><b>TOTAL: {{total_earnings.total}}€</b></span>
+    </div>
+</div>
+
+
+{% endblock %}

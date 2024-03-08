@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block update_user_block %}
+
+<style>
+    .update_user_card {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 380px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 150px;
+        height: 570px;
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        left: 8%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 30px;
+    }
+
+    .formFields input {
+        width: 300px;   
+    }
+
+
+    .formFields input {
+        margin-bottom: 12px; 
+    }
+
+
+    #update_user_title {
+        color: #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .update_user_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 9px 130px;
+        cursor: pointer;
+        position: relative;
+        left: 30px;
+        margin-top: 5px;
+        border-radius: 5px;
+    }
+</style>
+<form method="POST">
+    <div class="update_user_card">
+        <h3 id="update_user_title">Update user</h3><br><br>
+        <div class="formFields">
+            {{form}}
+            {% csrf_token %}
+        </div><br><br>
+        <input type="submit" value="Update" class="update_user_btn">
+    </div>
+</form>
+{% endblock %}

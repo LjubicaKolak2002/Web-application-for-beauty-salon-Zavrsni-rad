@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block print_categories_block %}
+
+<h3>Our services</h3>
+
+{% if user.is_authenticated and request.user.is_superuser %}
+    <a href="{%url 'add_category' %}">+New category</a>
+    
+{% endif %}
+{% for category in categories %}
+    {{category}}<br>
+{% endfor %}
+
+{% endblock %}

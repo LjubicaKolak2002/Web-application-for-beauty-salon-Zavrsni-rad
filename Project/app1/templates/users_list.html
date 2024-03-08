@@ -1,0 +1,84 @@
+{% extends 'base.html '%}
+{% block users_list_block %}
+
+<style>
+    #list_title {
+        font-family:  Arial, Helvetica, sans-serif;
+        font-size: 25px;
+        position: relative;
+        margin-left: 85px;
+        top: 50px;
+        color: black;
+        font-weight: 400;
+    }
+
+
+    .icons_new_user {
+        position: relative;
+        top: -16px;
+        left: 50px;
+    }
+
+    #users_table {
+        position: relative;
+        left: 75px;
+        top: 25px;
+    }
+
+    .searchBar {
+        position: relative;
+        margin-left: 80%;
+        top: 50px;
+    }
+
+    #search_input {
+        height: 26px;
+    }
+
+    .spaced-table {
+        border-collapse: collapse;
+    }
+    .spaced-table th,
+    .spaced-table td {
+        padding: 8px;
+    }
+    .spaced-table th:not(:last-child),
+    .spaced-table td:not(:last-child) {
+        padding-right: 80px; 
+    }
+
+
+</style>
+
+<div class="searchBar">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search" id="search_input">
+            <button class="icons" style="color:#f77e7e; font-size: 20px;"><i class="fa fa-search"></i></button></a>
+          </form>
+        </div>
+    </nav> <br>
+</div>
+
+<h2 id="list_title">List of users</h2><br><br>
+<a href="{% url 'add_user' %}"><button class="icons_new_user" style="color:#f77e7e;font-size:25px;"><i class="fa fa-user-plus"></i></button></a>
+<table id="users_table" class="spaced-table">
+    <tr>
+        <th>User</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td><a href="{%url 'update_user' user_id=user.id %}"><button class="icons" style="color:#bdb2b2;font-size:18px"><i class="fa fa-edit"></i></button></a></td></a></td>
+            <td><a href="{%url 'delete_user' user_id=user.id %}"><button class="icons" style="color:#bdb2b2;font-size: 18px;"><i class="fa fa-trash"></i></button></a></td></a></td>
+
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

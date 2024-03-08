@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block user_appointments_future_block %}
+
+<style>
+        .appointment-item {
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-bottom: 10px;
+                width: 40%;
+                position: relative;
+                left: 28%;
+                top: 120px;
+                height: 55px;
+                font-family: system-ui;
+                font-size: 15px;
+
+        }
+
+        .appointment-details {
+                flex: 1;
+        }
+
+        .service-name {
+                font-weight: bold;
+        }
+
+        .employee-name {
+                position: relative;
+                top: 10px;
+                color: rgb(102, 99, 99);
+
+        }
+
+        .appointment-date-time {
+                text-align: center;
+        }
+
+        .icon-button {
+                margin-right: 5px;
+        }
+
+        .date,
+        .time {
+                display: block;
+        }
+
+        .appointment-date-time {
+                display: flex;
+                align-items: center;
+        }
+
+        .date-time-container {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+        }
+
+        .icon-button {
+                margin-right: 5px;
+        }
+
+        .date,
+        .time {
+                display: block;
+        }
+
+        #my_app_title {
+                font-family: 'Brush Script Std';
+                text-align: center;
+                font-size: 30px;
+                color:rgb(102, 99, 99);
+                position: relative;
+                font-weight: 500;
+                top: 90px;
+        }
+
+        .appointment-item {
+                display: flex;
+                justify-content: space-between;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin-bottom: 10px;
+        }
+
+        .appointment-details {
+                flex: 1;
+        }
+
+        .service-name {
+                font-weight: bold;
+                color: rgb(102, 99, 99);
+        }
+
+        .appointment-date-time {
+                display: flex;
+                align-items: center;
+        }
+
+        .date-time-container {
+                display: flex;
+                align-items: center;
+                margin-right: 13px;
+        }
+
+        .icon-button {
+                margin-right: 5px;
+        }
+
+        .date,
+        .time {
+                display: block;
+        }
+
+        .cancel-button-container {
+                margin-left: auto;
+        }
+
+        .cancel-button {
+                background-color: #f77e7e;
+                border: none;
+                border-radius: 5px;
+                font-size: 15px;
+                padding: 5px 10px;
+                color: #fff;
+                position: relative;
+                top: 10px;
+        }
+
+        .service-name {
+                position: relative;
+                top: 10px;
+        }
+
+</style>
+
+<h2 id="my_app_title">Future appointments</h2>
+<div class="appointments-container">
+        {% for appointment in upcoming_appointments %}
+        <div class="user_appointment">
+            <div class="appointment-item">
+              <div class="appointment-details">
+                <span class="service-name">{{appointment.service}}</span><br>
+                <span class="employee-name">{{appointment.employee}}</span>
+              </div>
+              <div class="appointment-date-time">
+                <div class="date-time-container">
+                  <button class="icon-button" style="color: #f77e7e;background-color: white;border:none;font-size:15px;"> <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                  <span class="date">{{appointment.date}}</span>
+                </div>
+                <div class="date-time-container">
+                  <button class="icon-button" style="color: #f77e7e;background-color: white;border:none;font-size:15px;"> <i class="fa fa-clock-o" aria-hidden="true"></i></button>
+                  <span class="time">{{appointment.time}}</span>
+                </div>
+              </div>
+              <div class="cancel-button-container">
+                <button class="cancel-button"><a href="{% url 'delete_appointment_confirmation' user_id=appointment.user.id appointment_id=appointment.id %}" style="text-decoration: none;color: #fff;">CANCEL</a></button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+{% endblock %}

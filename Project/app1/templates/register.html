@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block register_block %}
+
+<style>
+    .form_register {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 370px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 100px;
+        height: 590px;
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        left: 10%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 30px;
+        
+    }
+
+    .formFields input {
+        width: 280px;
+    }
+
+    .formFields input {
+        margin-bottom: 12px; 
+    }
+
+    #register_title {
+        color:  #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    .register_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 118px;
+        cursor: pointer;
+        position: relative;
+        left: 39px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+</style>
+<form method="post">
+    <div class="form_register">
+        <h2 id="register_title">SIGN UP</h2><br><br>
+            <div class="formFields">
+                {{form}}
+                {% csrf_token %}
+            </div>
+
+            <button class="register_btn"> Register</button>
+    </div>
+</form>
+
+{% endblock %}

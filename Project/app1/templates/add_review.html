@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block add_review_block %}
+
+<style>
+     .review_card {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto; /* Centriranje forme */
+        padding: 20px;
+        margin-top: 150px;
+        height: 380px;
+        text-align: center;
+
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        left: 8%;
+        position: relative;
+    }
+
+    .formFields input {
+        height: 30px;
+        
+    }
+
+    .formFields input {
+        width: 255px;
+    }
+
+
+
+    #review_title {
+        color:  #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #create_review_btn {
+        background-color:  #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 112px;
+        cursor: pointer;
+        position: relative;
+        left: 2px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+    .rating-stars {
+        font-size: 24px;
+    }
+
+    .star {
+        color: #ccc; 
+        cursor: pointer;
+    }
+
+    .star.selected {
+        color: #efd56d; 
+    }
+
+
+</style>
+<form action="" method="post">
+    <div class="review_card">
+        <h2 id="review_title">Create reviews</h2><br><br>
+
+        <div class="formFields">
+            {{ form.text.label_tag }}
+            {{ form.text }}
+            <br>
+            <div class="rating-stars">
+                <input type="hidden" name="mark" id="mark_input" value="5">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+            {% csrf_token %}
+        </div>
+        <br>
+        <input type="submit" value="Send" id="create_review_btn">
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const stars = document.querySelectorAll(".star");
+    const markInput = document.getElementById("mark_input");
+    
+    stars.forEach(star => {
+        star.addEventListener("click", function() {
+            const value = this.getAttribute("data-value");
+            markInput.value = value;
+            
+            stars.forEach(s => s.classList.remove("selected"));
+            for (let i = 0; i < value; i++) {
+                stars[i].classList.add("selected");
+            }
+        });
+    });
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block add_category_block %}
+
+
+
+<style>
+    .category_card {
+       border: 1px solid #ccc;
+       position: relative;
+       background-color: white;
+       width: 300px;
+       margin: 0 auto; /* Centriranje */
+       padding: 20px;
+       margin-top: 150px;
+       height: 320px;
+   }
+
+   .formFields {
+       display: flex;
+       flex-direction: column;
+       width: 85%;
+       left: 8%;
+       position: relative;
+    }
+
+   .formFields input {
+       height: 30px;
+       
+   }
+
+    .formFields input {
+        width: 255px;
+    }
+
+    #category_title {
+        color:  #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+
+    #new_category_btn {
+        background-color: #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 90px;
+        cursor: pointer;
+        position: relative;
+        left: 28px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+    .formFields input {
+        margin-bottom: 12px; 
+    }
+
+
+</style>
+<form enctype="multipart/form-data" method="post">
+    <div class="category_card">
+        <h2 id="category_title">Adding new category</h2><br><br>
+        <div class="formFields">
+            {{form}}
+            {% csrf_token %}
+        </div>
+        <br>
+        <input type="submit" value="Add category" id="new_category_btn">
+    </div>
+</form>
+
+{% endblock %}

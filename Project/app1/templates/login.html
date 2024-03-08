@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block login_block %}
+
+<style>
+    
+    .form_login {
+        border: 1px solid #ccc;
+        position: relative;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto; 
+        padding: 20px;
+        margin-top: 150px;
+        height: 325px;
+        
+    }
+
+    .formFields {
+        display: flex;
+        flex-direction: column;
+        width: 25%;
+        left: 10%;
+        position: relative;
+    }   
+
+    .formFields input {
+        height: 30px;
+        
+    }
+
+    .formFields input {
+        width: 255px;
+    }
+
+
+    .login_register {
+        background-color:  #f77e7e;
+        color: white;
+        border: none;
+        padding: 10px 110px;
+        cursor: pointer;
+        position: relative;
+        left: 9px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+    #login_title {
+        color: #f77e7e;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #password_link {
+        color:#d18b8b;
+        position: relative;
+        top: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    #register_link {
+        background-color:#d18b8b;
+        color: white;
+        border: none;
+        padding: 10px 103px;
+        cursor: pointer;
+        position: relative;
+        bottom: 15px;
+        left: 9px;
+        margin-top: 25px;
+        border-radius: 5px;
+    }
+
+    .formFields input {
+        margin-bottom: 12px; 
+    }
+
+    #error_message {
+        color: red;
+        font-weight: bolder;
+    }
+
+</style>
+<div class="form_login">
+    <h2 id="login_title">SIGN IN</h2><br>
+    <form method="post">
+        <div class="formFields">
+            {{form.username.label_tag}} {{form.username}}
+            {{form.password.label_tag}} {{form.password}}
+            {% csrf_token %}
+        </div>
+        <div class="btn2">
+            <button class="login_register"> Login </button>
+        </div>
+    </form>
+    {% if form.errors %}
+    <span id="error_message">
+       Incorrectly entered data!
+    </span>
+    {% endif %}
+    <button id="register_link"><a href="{% url 'register' %}" style="text-decoration: none;color:white">Sign up</a></button>
+
+    <a href="{% url 'change_password'%}" id="password_link">Change password</a><br>
+</div>
+{% endblock %}
+
